@@ -3,6 +3,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -10,10 +11,42 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import java.awt.Checkbox
 
 @Composable
 fun LessonChecks() {
+    var red by remember { mutableStateOf(true) }
+    var yellow by remember { mutableStateOf(true) }
+    var green by remember { mutableStateOf(false) }
 
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(red, { red = it })
+            Text("Красный")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(yellow, { yellow = it })
+            Text("Жёлтый")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(green, { green = it  })
+            Text("Зелёный")
+        }
+
+        Column(modifier = Modifier.clip(CircleShape).background(Color.Gray)){
+            Box( Modifier.weight(1f).padding(16.dp).aspectRatio(1f).clip(CircleShape)
+                .background(if (red) Color.Red else Color.DarkGray))
+
+            Box( Modifier.weight(1f).padding(16.dp).aspectRatio(1f).clip(CircleShape)
+                .background(if (yellow) Color.Yellow else Color.DarkGray))
+
+            Box( Modifier.weight(1f).padding(16.dp).aspectRatio(1f).clip(CircleShape)
+                .background(if (green) Color.Green else Color.DarkGray))
+
+        }
+    }
 }
 
 /*

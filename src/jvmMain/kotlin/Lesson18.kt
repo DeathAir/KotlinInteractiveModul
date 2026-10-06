@@ -9,7 +9,16 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LessonPadding(colors: List<Pair<String, Color>>) {
-
+    Column {
+        for (color in colors){
+            Text(
+                text = color.first,
+                modifier = Modifier.padding(8.dp),
+                color = color.second
+            )
+            Divider()
+        }
+    }
 }
 
 /*

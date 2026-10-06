@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,10 +17,27 @@ import androidx.compose.ui.unit.dp
 import lessons.User
 import ui.ElevatedCard
 import ui.LazyHorizontalGrid
+import ui.LazyVerticalGrid
 
 @Composable
 fun LessonHGrid(users: List<User>) {
+    LazyHorizontalGrid(GridCells.Fixed(3)) {
+        items(users) {user ->
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                ElevatedCard(modifier = Modifier.padding(5.dp).weight(1f), shape = CircleShape) {
+                    Image(painterResource(user.photo), " ", modifier = Modifier.clickable{}
+                        .padding(10.dp)
+                        .clip(CircleShape)
+                    )
 
+                }
+                Text(user.position,
+                    modifier = Modifier.padding(bottom = 10.dp),
+                    color = Color.Gray)
+            }
+
+        }
+    }
 }
 
 /*

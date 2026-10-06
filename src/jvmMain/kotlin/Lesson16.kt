@@ -1,4 +1,5 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -14,7 +15,27 @@ import ui.ElevatedButton // не удалять!
 
 @Composable
 fun LessonBack() {
+    var file: String? by remember { mutableStateOf(null) }
+    BackHandler(file != null) { file = null }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Используйте кнопку возврата на устройстве", modifier = Modifier.padding(4.dp))
+        file?.let {
+            Image(painterResource(it), null) } ?:
+            run{
+                Row {
+                    ElevatedButton({file=R.drawable.p1}, Modifier.weight(1f).aspectRatio(1f).padding(3.dp)) {
+                        Image(painterResource(R.drawable.p1), "яблоко")
+                    }
+                    ElevatedButton({file=R.drawable.p2}, Modifier.weight(1f).aspectRatio(1f).padding(3.dp)) {
+                        Image(painterResource(R.drawable.p2), "груша")
+                    }
+                    ElevatedButton({file=R.drawable.p3}, Modifier.weight(1f).aspectRatio(1f).padding(3.dp)) {
+                        Image(painterResource(R.drawable.p3), "вишня")
+                    }
+                }
+            }
 
+    }
 }
 
 /*

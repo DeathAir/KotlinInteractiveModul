@@ -14,7 +14,19 @@ import ui.verticalScroll
 
 @Composable // icons - список (List) из пар (Pair) значений - векторного рисунка (ImageVector) и строки (String)
 fun LessonRows(icons: List<Pair<ImageVector, String>>) {
+    Column(Modifier.verticalScroll(rememberScrollState())) {
+        for(icon in icons) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(icon.first, null)
+                Text(
+                    text = icon.second,
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+            Divider()
+        }
 
+    }
 }
 
 /*

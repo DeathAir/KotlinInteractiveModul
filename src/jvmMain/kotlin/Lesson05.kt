@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import ui.ElevatedButton // не удалять!
+import javax.swing.Icon
 
 private val buttons = listOf(   // это может вам пригодиться:
     "Обычная кнопка", "Кнопка с окантовкой", "Приподнятая кнопка", "Тональная кнопка", "Текстовая кнопка",
@@ -14,8 +15,59 @@ private val buttons = listOf(   // это может вам пригодитьс
 
 @Composable
 fun LessonButtons() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        var text by remember { mutableStateOf("Нажмите любую кнопку:") }
+        Text(text)
+        Button({text = buttons[0]}) {
+            Icon(Icons.Default.Home, "Домой")
+            Text(buttons[0])
+        }
 
-}
+        OutlinedButton({text = buttons[1]}) {
+            Icon(Icons.Default.Call, "Телефон")
+            Text(buttons[1])
+        }
+
+        ElevatedButton({text = buttons[2]}) {
+            Icon(Icons.Default.Star, "Star")
+            Text(buttons[2])
+        }
+
+        FilledTonalButton({text = buttons[3]}) {
+            Icon(Icons.Default.Search, "Search")
+            Text(buttons[3])
+        }
+
+        TextButton({text = buttons[4]}) {
+            Text(buttons[4])
+        }
+
+        IconButton({text = buttons[5]}) {
+            Icon(Icons.Default.Favorite, "Favorite", tint = MaterialTheme.colorScheme.primary)
+
+        }
+
+        OutlinedIconButton({text = buttons[6]}) {
+            Icon(Icons.Default.Settings, "Settings")
+
+        }
+
+        FilledIconButton({text = buttons[7]}) {
+            Icon(Icons.Default.ExitToApp, "ExitToApp")
+
+        }
+
+        FilledTonalIconButton({text = buttons[8]}) {
+            Icon(Icons.Default.Face, "Face")
+
+        }
+
+        AssistChip({text = buttons[9]}, {Text(buttons[9])}, leadingIcon = {Icon(Icons.Default.Check, "Check")})
+
+        ElevatedAssistChip({text = buttons[10]}, {Text(buttons[10])}, leadingIcon = {Icon(Icons.Default.Clear, "Clear")})
+
+
+}}
 
 /*
     Тема - различные виды кнопок.

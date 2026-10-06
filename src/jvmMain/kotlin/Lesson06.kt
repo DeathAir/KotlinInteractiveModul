@@ -14,6 +14,23 @@ import ui.ElevatedButton // не удалять!
 
 @Composable
 fun LessonImages() {
+    var file by remember { mutableStateOf(R.drawable.p1) }
+
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(painterResource(file), "фрукт")
+        Row {
+            ElevatedButton({file=R.drawable.p1}, Modifier.weight(1f).aspectRatio(1f).padding(3.dp)) {
+                Image(painterResource(R.drawable.p1), "яблоко")
+            }
+            ElevatedButton({file=R.drawable.p2}, Modifier.weight(1f).aspectRatio(1f).padding(3.dp)) {
+                Image(painterResource(R.drawable.p2), "груша")
+            }
+            ElevatedButton({file=R.drawable.p3}, Modifier.weight(1f).aspectRatio(1f).padding(3.dp)) {
+                Image(painterResource(R.drawable.p3), "вишня")
+            }
+        }
+    }
 
 }
 

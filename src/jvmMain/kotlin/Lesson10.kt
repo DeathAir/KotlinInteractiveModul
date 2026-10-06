@@ -12,7 +12,18 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LessonTextFields() {
+    var text1 by remember { mutableStateOf("") }
+    var text2 by remember { mutableStateOf("") }
+    var text3 by remember { mutableStateOf("Простое поле ввода") }
+    var text4 by remember { mutableStateOf("") }
 
+    Column {
+        TextField(text1, {text1 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp), label = { Text("Поле ввода") })
+        OutlinedTextField(text2, {text2 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp), label = { Text("Поле ввода с окантовкой") })
+        BasicTextField(text3, {text3 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp))
+        TextField(text4, {text4 = it}, modifier = Modifier.fillMaxSize().padding(10.dp), label = { Text("Ввод текста") })
+
+    }
 }
 
 

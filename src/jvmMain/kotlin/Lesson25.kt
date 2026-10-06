@@ -1,8 +1,11 @@
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +22,22 @@ import ui.HorizontalPager
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LessonPager(users: List<User>) {
-
+    HorizontalPager(rememberPagerState { users.size })
+    {
+        ElevatedCard(modifier = Modifier.padding(10.dp))
+        {
+            Column(horizontalAlignment = Alignment.CenterHorizontally)
+            {
+                val user = users[it]
+                Image(painterResource(user.photo), "",
+                    modifier = Modifier.padding(15.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                )
+                Text(user.surName + " " + user.firstName + " " + user.lastName )
+                Text(user.position, modifier = Modifier.padding(bottom = 10.dp), color = Color.Gray)
+            }
+        }
+    }
 }
 
 /*

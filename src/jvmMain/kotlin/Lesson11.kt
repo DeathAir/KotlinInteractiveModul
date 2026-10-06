@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -23,7 +24,64 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LessonTextFieldTypes() {
+    var text1 by remember { mutableStateOf("") }
+    var text2 by remember { mutableStateOf("") }
+    var text3 by remember { mutableStateOf("") }
+    var text4 by remember { mutableStateOf("") }
 
+    Column {
+        OutlinedTextField(text1, {text1 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp),
+            label = { Text("Поле ввода пароля") },
+            placeholder = { Text("Введите не менее 6 букв и цифр") },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation()
+        )
+
+        OutlinedTextField(text2, {text2 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp),
+            label = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Default.Edit,
+                        contentDescription = null)
+                        Text("Поле с кнопками")
+                }
+                    },
+            placeholder = { Text("Начинайте ввод...") },
+            singleLine = true,
+
+            leadingIcon = {
+                Icon(
+                Icons.Default.Clear,
+                    contentDescription = null,
+                    tint = Color.Red,
+                    modifier = Modifier.clickable{}
+                )
+                          },
+            trailingIcon = {
+                Icon(
+                    Icons.Default.Search,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable{}
+                )
+            }
+            )
+
+        OutlinedTextField(text3, {text3 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp),
+            label = { Text("Закруглённое поле ввода") },
+            shape = CircleShape
+        )
+
+        OutlinedTextField(text4, {text4 = it}, modifier = Modifier.fillMaxWidth().padding(10.dp),
+            label = { Text("Что за фрукт?") },
+            leadingIcon = {
+                Image(painterResource(R.drawable.p1),
+                    contentDescription = null,
+                    modifier = Modifier.padding(4.dp))
+
+            }
+        )
+    }
 }
 
 /*

@@ -9,6 +9,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LessonColumn() {
+    Column(modifier=Modifier.background(Color.DarkGray)){
+        Text("Красный",modifier=Modifier.padding(8.dp), color = Color.Red)
+        Text("Желтый",modifier=Modifier.padding(8.dp), color = Color.Yellow)
+        Text("Зелёный",modifier=Modifier.padding(8.dp), color = Color.Green)
+    }
 
 }
 

@@ -9,6 +9,50 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun LessonSwitches() {
+    var radio by remember { mutableStateOf(false) }
+    var checked by remember { mutableStateOf(false) }
+    var switch by remember { mutableStateOf(false) }
+    var icon by remember { mutableStateOf(false) }
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(radio,{radio = !radio})
+            if (!radio) Text("нет")
+            else
+                Text("да")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(checked, { checked = it })
+            if (!checked) Text("не выбран")
+            else
+                Text("выбран")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Switch(switch, { switch = it })
+            if (!switch) Text("выключен")
+            else
+                Text("включен")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconToggleButton(icon, {icon = it}) {
+                Icon(Icons.Default.Favorite, "Favorite", tint = if (!icon) Color.Gray else MaterialTheme.colorScheme.primary )
+            }
+
+            Text(
+                text = if (!icon) "не нравится" else "нравится"
+            )
+
+
+
+
+
+
+        }
+
+
+    }
 
 }
 

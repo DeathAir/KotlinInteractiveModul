@@ -1,6 +1,7 @@
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
@@ -9,7 +10,19 @@ import ui.DropdownMenu
 
 @Composable // Используйте exit в качестве параметра-действия для пункта "выход"
 fun LessonMenu(exit: ()->Unit) {
+    var expanded by remember { mutableStateOf(false) }
 
+    Box{
+        FilledTonalButton(onClick = { expanded = true }) { Text("Файл")}
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenuItem({Text("Создать")}, onClick = { expanded = false }, leadingIcon = {Icon(Icons.Default.Create,"")})
+            DropdownMenuItem({Text("Отправить")}, onClick = { expanded = false }, leadingIcon = {Icon(Icons.Default.Share, "")})
+            Divider()
+            DropdownMenuItem({Text("Выход")}, onClick = { expanded = false }, leadingIcon = {Icon(Icons.Default.ExitToApp, "")})
+
+
+        }
+    }
 }
 
 /*
@@ -29,7 +42,7 @@ fun LessonMenu(exit: ()->Unit) {
 
     Используйте значки: Icons.Default.Create, Icons.Default.Share, Icons.Default.ExitToApp;
     Используйте разделитель Divider() перед последним элементом;
-    Используйте exit в качестве параметра-действия для пункта "выход".
+    Используйте exit в качествтре парамеа-действия для пункта "выход".
 
     Справка:
     https://metanit.com/kotlin/jetpack/4.17.php

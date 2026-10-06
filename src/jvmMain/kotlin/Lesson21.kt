@@ -1,8 +1,10 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,7 +16,22 @@ import ui.verticalScroll
 
 @Composable
 fun LessonCards(fruits: List<Pair<String, String>>) {
+    Column(Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
+        for(fruit in fruits) {
+            ElevatedCard(modifier = Modifier.padding(8.dp)) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource(fruit.first), "")
+                    Text(
+                        text = fruit.second,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                }
 
+            }
+
+        }
+
+    }
 }
 
 /*

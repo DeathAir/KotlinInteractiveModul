@@ -2,6 +2,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -11,7 +12,31 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LessonSliders() {
+    var red by remember { mutableStateOf(0f) }
+    var green by remember { mutableStateOf(0f) }
+    var blue by remember { mutableStateOf(0f) }
 
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Slider(value = red, onValueChange = { red = it })
+        Slider(value = green, onValueChange = { green = it })
+        Slider(value = blue, onValueChange = { blue = it })
+
+        Box(modifier = Modifier.fillMaxWidth().aspectRatio(1f).background(Color(red = red, green = green, blue = blue)))
+        Row(modifier = Modifier.fillMaxSize()) {
+            Text((red*100).toInt().toString()+"%", modifier =
+                Modifier.weight(1f).background(Color.Red).padding(8.dp), textAlign = TextAlign.Center)
+
+            Text((green*100).toInt().toString()+"%", modifier =
+                Modifier.weight(1f).background(Color.Green).padding(8.dp), textAlign = TextAlign.Center)
+
+            Text((blue*100).toInt().toString()+"%", modifier =
+                Modifier.weight(1f).background(Color.Blue).padding(8.dp), textAlign = TextAlign.Center)
+
+        }
+
+
+
+    }
 }
 
 /*

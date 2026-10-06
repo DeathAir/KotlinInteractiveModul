@@ -5,7 +5,14 @@ import androidx.compose.ui.graphics.Color
 
 @Composable   // colors - список (List) из пар (Pair) значений - строки (String) и цвета (Color)
 fun LessonSimple(colors: List<Pair<String, Color>>) {
-
+    Column {
+        for (color in colors){
+            Text(
+                text = color.first,
+                color = color.second
+            )
+        }
+    }
 }
 
 /*

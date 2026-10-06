@@ -13,7 +13,13 @@ import ui.LazyVerticalGrid
 
 @Composable
 fun LessonVGrid(fruits: List<Pair<String, String>>) {
-
+    LazyVerticalGrid(GridCells.Fixed(3)) {
+        items(fruits) { ( picture, _ ) ->
+            ElevatedCard(modifier = Modifier.padding(5.dp), shape = CircleShape) {
+                Image(painterResource(picture), "", modifier = Modifier.clickable{})
+            }
+        }
+    }
 }
 
 /*

@@ -24,13 +24,38 @@ private data class User(  // класс "Пользователь", список
 
 @Composable  // users - список пользователей класса User
 fun LessonUsers(users: List<User>) {
+    Column(Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
+        for(user in users) {
+            ElevatedCard(
+                modifier = Modifier.padding(5.dp).align(Alignment.CenterHorizontally)
+            )
+            {
+                Row(modifier = Modifier.height(100.dp).fillMaxWidth().clickable{}) {
+                    Image(
+                        painterResource(user.photo),
+                        contentDescription = user.photo, modifier = Modifier.padding(10.dp).clip(CircleShape)
+                    )
+                    Column(modifier = Modifier.padding(10.dp).fillMaxHeight(), Arrangement.SpaceEvenly) {
+                        Text(user.surName)
+                        Text(user.firstName + " " + user.lastName)
+                        Divider()
+                        Text(
+                            text = user.position,
+                            color = Color.Gray
+                        )
+                    }
+                }
 
+            }
+        }
+
+    }
 }
 
 /*
     Пришло время посмотреть, чему мы научились.
     Приподнятая карточка с отступами на 5,
-        внутри - горизонтальный ряд с модификатором высоты (height) 100, на всю ширину экрана,
+        внуонтри - горизтальный ряд с модификатором высоты (height) 100, на всю ширину экрана,
             внутри - фото пользователя с модификаторами отступов на 10 и обрезки по окружности .clip(CircleShape),
             и столбец с отступами на 10, на всю высоту ряда, второй его параметр = Arrangement.SpaceEvenly,
                 внутри три текста с разделителем. Последний текст - серым цветом.

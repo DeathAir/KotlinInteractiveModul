@@ -13,6 +13,36 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LessonRadios() {
+    var color by remember { mutableStateOf(Color.Red) }
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(color == Color.Red, { color = Color.Red })
+            Text("Красный")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(color == Color.Yellow, { color = Color.Yellow })
+            Text("Жёлтый")
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(color == Color.Green, { color = Color.Green })
+            Text("Зелёный")
+        }
+
+        Column(modifier = Modifier.clip(CircleShape).background(Color.Gray)){
+            Box( Modifier.weight(1f).padding(16.dp).aspectRatio(1f).clip(CircleShape)
+                .background(if (color == Color.Red) color else Color.DarkGray))
+
+            Box( Modifier.weight(1f).padding(16.dp).aspectRatio(1f).clip(CircleShape)
+                .background(if (color == Color.Yellow) color else Color.DarkGray))
+
+            Box( Modifier.weight(1f).padding(16.dp).aspectRatio(1f).clip(CircleShape)
+                .background(if (color == Color.Green) color else Color.DarkGray))
+
+        }
+    }
+
 
 }
 

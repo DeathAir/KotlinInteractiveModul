@@ -1,5 +1,6 @@
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
@@ -7,12 +8,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kotlin.math.min
 
 @Composable
 fun LessonProgress() {
+    var text by remember { mutableStateOf("") }
 
+    Column {
+        TextField(text, {text = it}, modifier = Modifier.fillMaxWidth().aspectRatio(1f), label = { Text("Ваша работа") })
+        Text("Индикатор усталости:", modifier = Modifier.padding(8.dp))
+        LinearProgressIndicator(text.length/100f, modifier = Modifier.fillMaxWidth())
+
+    }
 }
 
 /*

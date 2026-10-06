@@ -3,6 +3,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -23,7 +24,23 @@ import ui.LazyColumn
 
 @Composable // chat - "генератор бреда", список пар "пользователь-случайнаяФраза"
 fun LessonChat(chat: List<Pair<User, String>>) {
+    val state = rememberLazyListState()
+    LaunchedEffect(chat.size) { state.animateScrollToItem(chat.size) }
+    LazyColumn(state = state) {
+        items(chat){ (user,message) ->
+            Row(modifier = Modifier.height(30.dp), verticalAlignment = Alignment.CenterVertically) {
+                Image(painterResource(user.photo), " ", modifier = Modifier.padding(horizontal = 8.dp).clip(CircleShape))
+                Text(user.surName + " " + user.firstName + " " + user.lastName,
+                    fontSize = 14.sp, color = Color.Gray )
 
+            }
+            ElevatedCard(modifier = Modifier.padding(bottom = 15.dp, start = 5.dp, end = 5.dp)){
+                SelectionContainer {
+                    Text(message,modifier = Modifier.padding(10.dp))
+                }
+            }
+        }
+    }
 }
 
 /*
