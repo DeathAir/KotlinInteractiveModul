@@ -19,11 +19,39 @@ import lessons.User
 import ui.AnimatedVisibility
 import ui.ElevatedCard
 import ui.LazyColumn
+import ui.verticalScroll
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LessonUserList(allUsers: List<User>) {
+    val users = remember { allUsers.toMutableStateList() }
+    var edit: User? by remember { mutableStateOf(null) }
+    Column(Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
+        for(user in users) {
+            ElevatedCard(
+                modifier = Modifier.padding(5.dp).align(Alignment.CenterHorizontally)
+            )
+            {
+                Row(modifier = Modifier.height(100.dp).fillMaxWidth().clickable{}) {
+                    Image(
+                        painterResource(user.photo),
+                        contentDescription = user.photo, modifier = Modifier.padding(10.dp).clip(CircleShape)
+                    )
+                    Column(modifier = Modifier.padding(10.dp).fillMaxHeight(), Arrangement.SpaceEvenly) {
+                        Text(user.surName)
+                        Text(user.firstName + " " + user.lastName)
+                        Divider()
+                        Text(
+                            text = user.position,
+                            color = Color.Gray
+                        )
+                    }
+                }
 
+            }
+        }
+
+    }
 }
 
 /*

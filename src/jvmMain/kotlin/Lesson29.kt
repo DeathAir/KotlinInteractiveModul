@@ -15,8 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import lessons.User
 import ui.AnimatedVisibility
 import ui.ElevatedCard
@@ -24,7 +27,40 @@ import ui.LazyVerticalGrid
 
 @Composable    // reviews - "генератор бреда", список пар "пользователь-случайнаяФраза"
 fun LessonReviews(reviews: List<Pair<User, String>>) {
+    var open: Pair<User, String>? by remember { mutableStateOf(null) }
+    var top by remember { mutableStateOf(0f) }
+    Box(){
+        LazyVerticalGrid(GridCells.Fixed(3)){
+            items(reviews){ (user, review)->
 
+                var y by remember { mutableStateOf(0f) }
+                val alpha by animateFloatAsState(if (open == null || user == open?.first) 1f else 0.5f)
+                ElevatedCard(Modifier.padding(5.dp).alpha(alpha).onGloballyPositioned {y = it.positionInParent().y + it.size.height - 28}) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.clickable { open = Pair(user,review)
+                            top = y }) {
+                        Image(painterResource(user.photo),"1",
+                            modifier = Modifier.padding(5.dp).clip(RoundedCornerShape(10)))
+                        Text(user.firstName,
+                            modifier = Modifier.padding(bottom = 5.dp),
+                            color = Color.Gray)
+                    }
+
+                }
+            }
+        }
+        AnimatedVisibility(open != null, Modifier.offset(y = top.dp)) {
+            ElevatedCard(Modifier.fillMaxWidth().padding(5.dp)) {
+                Column(Modifier.padding(10.dp).clickable { open = null }) {
+                    Text(open?.second ?: "")
+                    Text(open?.first?.firstName+ " " + open?.first?.surName +", "+ open?.first?.position ,
+                        modifier = Modifier.align(alignment = Alignment.End),
+                        style = TextStyle(fontSize =16.sp,fontStyle = FontStyle.Italic,color = Color.Gray))
+
+                }
+            }
+        }
+    }
 }
 
 /*  Задание повышенной сложности
